@@ -92,6 +92,9 @@ ul.clean{margin:0;padding-left:1.1em;display:grid;gap:4px}
 .levels{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.88rem;color:var(--muted)}
 details{border-top:1px solid var(--line);padding-block:14px}
 details:last-child{border-bottom:1px solid var(--line)}
+.faq-groups{display:grid;gap:28px}
+.faq-group{display:grid;gap:8px}
+.faq-group h3{color:var(--leaf)}
 summary{cursor:pointer;font-weight:700}
 details p{margin-top:8px}
 @media (max-width:520px){.step{grid-template-columns:1fr}.community{grid-template-columns:1fr}.community svg{max-width:160px}}
@@ -200,12 +203,32 @@ details p{margin-top:8px}
 
 <section aria-labelledby="faq-h" style="display:grid;gap:10px">
   <h2 id="faq-h">Quick answers</h2>
-  <div>
-    <details><summary>Is there a minimum group size?</summary><p>No. Tell us your size and we'll find the right project.</p></details>
-    <details><summary>Do we need gardening experience?</summary><p>No. We'll show you everything. Willingness to get your hands dirty matters more.</p></details>
-    <details><summary>What do volunteers work on?</summary><p>Planting, harvesting, weeding, mulching, trimming, and building or repairing garden beds. Projects change with the season.</p></details>
-    <details><summary>What if it rains or it's too hot?</summary><p>We'll contact your group organizer and move you to the next open date.</p></details>
-    <details><summary>Where do we park and meet?</summary><p>We send parking and meeting details to your organizer before the day.</p></details>
+  <div class="faq-groups">
+    <div class="faq-group"><h3>Groups and companies</h3><div>
+      <details><summary>What types of groups can volunteer?</summary><p>Companies, schools, churches, service organizations, clubs, community groups, and other organized groups are welcome.</p></details>
+      <details><summary>How many people can volunteer as a group?</summary><p>Group size depends on the project, available space, and the type of work planned. Please provide your estimated group size when you book.</p></details>
+      <details><summary>Is there a minimum group size?</summary><p>No minimum size for groups. Contact us to find the right opportunity no matter the size of your team.</p></details>
+      <details><summary>Can our company organize a corporate volunteer day?</summary><p>Yes. Corporate groups are welcome. Tell us your group size, preferred dates, and any goals for the volunteer experience when you book.</p></details>
+      <details><summary>Can our group make a donation or sponsor the volunteer day?</summary><p>Yes. Groups interested in supporting Second Chance Youth Garden beyond volunteering can ask about donations, supplies, sponsorships, or other ways to support our programs.</p></details>
+      <details><summary>Can volunteer hours be verified?</summary><p>If your school, employer, or organization requires verification, please let us know before your volunteer date.</p></details>
+    </div></div>
+    <div class="faq-group"><h3>Booking and registration</h3><div>
+      <details><summary>Does everyone in our group need to register?</summary><p>The group leader books one date for the whole group using the See open dates button, with your organization, estimated group size, and contact information. Then every person in the group signs the volunteer waiver before the day. Our team will follow up to confirm availability and next steps.</p></details>
+      <details><summary>Can we choose our volunteer date?</summary><p>Yes! Pick your preferred date and time and we'll confirm availability based on the garden's schedule, current projects, and staffing.</p></details>
+      <details><summary>How far in advance should we schedule our group?</summary><p>We recommend booking at least 2–4 weeks in advance, particularly for larger groups.</p></details>
+      <details><summary>How long is a typical group volunteer session?</summary><p>Most group volunteer experiences last 3–4 hours depending on the project.</p></details>
+      <details><summary>Is there an age requirement?</summary><p>Yes and no. Groups that include minors may require adult chaperones and/or parent or guardian permission.</p></details>
+    </div></div>
+    <div class="faq-group"><h3>On the day</h3><div>
+      <details><summary>What kinds of projects do volunteer groups work on?</summary><p>Projects may include planting, harvesting, weeding, garden cleanup, preparing garden beds, mulching, organizing supplies, and other seasonal projects.</p></details>
+      <details><summary>Do we need gardening experience?</summary><p>No. We'll provide instructions for the day's activities. A willingness to help and get your hands dirty is more important than gardening experience.</p></details>
+      <details><summary>What should volunteers wear?</summary><p>Wear comfortable clothes that can get dirty and closed-toe shoes. We also recommend sun protection and clothing appropriate for the weather.</p></details>
+      <details><summary>What should our group bring?</summary><p>Volunteers should bring a reusable water bottle. We'll let your group leader know in advance if anything else is needed.</p></details>
+      <details><summary>Are tools and supplies provided?</summary><p>Second Chance Youth Garden provides the tools and supplies needed for most volunteer projects. For larger projects, we may coordinate additional needs with the group organizer.</p></details>
+      <details><summary>Is there a restroom and drinking water available?</summary><p>Yes. We have facilities and will provide water for you and your team.</p></details>
+      <details><summary>Where do we park and meet?</summary><p>Parking, arrival instructions, and the meeting location will be provided to the group organizer before the scheduled volunteer day.</p></details>
+      <details><summary>What happens if it rains or the weather is too hot?</summary><p>Because most volunteer work takes place outdoors, activities may need to be changed, postponed, or rescheduled due to unsafe weather. We'll contact the group organizer if plans change.</p></details>
+    </div></div>
   </div>
 </section>
 
@@ -270,6 +293,24 @@ details p{margin-top:8px}
     if(p.note){const t=card.querySelector('.badge');t.textContent=p.note;t.hidden=false}
     if(p.url && /^https:\/\//.test(p.url)){const v=document.createElement('a');v.className='visit';v.href=p.url;v.target='_blank';v.rel='noopener';v.textContent='Visit '+p.name+' \u2192';card.appendChild(v)}
   });
+})();
+</script>
+<script>
+/* Tells the Square embed how tall this page is so it never cuts off */
+(function(){
+  if (window.parent === window) return;
+  var last = 0;
+  function send(){
+    var b = document.body, cs = getComputedStyle(b);
+    var h = Math.ceil(b.getBoundingClientRect().height + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom));
+    if (h !== last){ last = h; try{ window.parent.postMessage({scygHeight: h}, '*'); }catch(e){} }
+  }
+  window.addEventListener('load', send);
+  window.addEventListener('resize', send);
+  document.addEventListener('toggle', send, true);
+  if (window.ResizeObserver) new ResizeObserver(send).observe(document.body);
+  setInterval(send, 1500);
+  send();
 })();
 </script>
 </body>
